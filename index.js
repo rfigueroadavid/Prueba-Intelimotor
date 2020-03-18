@@ -90,7 +90,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             let free = "#cancelButton"
             await page.evaluate((free) =>document.querySelector(free).click(), free);
             await page.waitFor(3000)
-            await page.screenshot({path: 'imgPublish.png'});
+            await page.screenshot({path: 'imgPublish.png', fullPage: true});
             await browser.close();
             fs.readFile('imgPublish.png', 'base64',
                 (e, base64Image) => {
