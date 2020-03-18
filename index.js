@@ -41,7 +41,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try {
                 document.querySelectorAll(clickType)[0].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_types'+error
             }
         }, clickType);
         /* Seleccionando marca */
@@ -52,7 +52,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try{
             document.querySelectorAll(clickType)[0].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_brands'+error
             }
         }, clickType);
         /* Seleccionando modelo */
@@ -63,7 +63,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try{
                 document.querySelectorAll(clickType)[1].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_models'+error
             }
         }, clickType);
         /* Seleccionando subtipo */
@@ -73,7 +73,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try{
                 document.querySelectorAll(clickType)[3].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_subtypes'+error
             }
         }, clickType);
         /* Seleccionando subtipo */
@@ -83,7 +83,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try{
                 document.querySelectorAll(clickType)[3].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_years'+error
             }
         }, clickType);
         /* Seleccionando estado */
@@ -93,7 +93,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try{
                 document.querySelectorAll(clickType)[18].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_provinces'+error
             }
         }, clickType);
         /* Seleccionando estado */
@@ -103,7 +103,7 @@ app.post('/publicarAnuncio',async (req, res) => {
             try{
                 document.querySelectorAll(clickType)[51].click()
             } catch (error) {
-                throw error
+                throw 'dropdown_cities'+error
             }
         }, clickType);
         /* setear recorrido */
@@ -112,7 +112,13 @@ app.post('/publicarAnuncio',async (req, res) => {
         await page.type('#input_precio', body.precio.toString())
         /* click finalizar primer paso */
         let nxtB = ".next-button"
-        await page.evaluate((nxtB) =>document.querySelector(nxtB).click(), nxtB);
+        await page.evaluate((nxtB) =>{
+            try{
+                document.querySelector(nxtB).click()
+            } catch (error) {
+                throw '.next-button 1 '+error
+            }
+        }, nxtB);
         await page.waitForSelector('#input_text_area_review')
         /* Poner descripcion */
         await page.type('#input_text_area_review', body.descripcion)
@@ -128,10 +134,22 @@ app.post('/publicarAnuncio',async (req, res) => {
             input.uploadFile(path)
         })).then( async ()=>{
             await page.waitFor(7000)
-            await page.evaluate((nxtB) =>document.querySelectorAll(nxtB)[1].click(), nxtB);
+            await page.evaluate((nxtB) =>{ 
+                try{
+                    document.querySelectorAll(nxtB)[1].click()
+                } catch (error) {
+                    throw '.next-button 2 '+error
+                }
+            }, nxtB);
             await page.waitForSelector("#cancelButton")
             let free = "#cancelButton"
-            await page.evaluate((free) =>document.querySelector(free).click(), free);
+            await page.evaluate((free) =>{ 
+                try{
+                    document.querySelector(free).click()
+                } catch (error) {
+                    throw 'cancelButton '+error
+                }
+            }, free);
             await page.waitFor(3000)
             await page.screenshot({path: 'imgPublish.png', fullPage: true});
             await browser.close();

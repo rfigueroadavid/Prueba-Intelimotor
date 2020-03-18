@@ -19,7 +19,6 @@ class App extends React.Component {
 
   render() {
     const publicarAnuncio = (data) => {
-      console.log("entra a publicar",data)
       let _this = this;
       this.setState({ publishing: "publicando" })
       let url = "http://localhost:8080/publicarAnuncio" 
