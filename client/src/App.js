@@ -19,6 +19,7 @@ class App extends React.Component {
 
   render() {
     const publicarAnuncio = (data) => {
+      console.log("entra a publicar",data)
       let _this = this;
       this.setState({ publishing: "publicando" })
       let url = "http://localhost:8080/publicarAnuncio" 
@@ -32,7 +33,7 @@ class App extends React.Component {
           _this.setState({ publishing: "Anuncio Publicado", src: response.data.src })
         })
         .catch(function (error) {
-          _this.setState({ publishing: "Error al publicar anuncio" })
+          publicarAnuncio({precio:data.precio , descripcion:data.descripcion})
         });
     }
 

@@ -15,3 +15,4 @@ Se ejecuta el comando npm install en la segunda consola, la cual esta direcciona
 
 ### `npm start` (FrontEnd)
 Levanta el servidor frontend en el puerto 3000
+Acceder al http://localhost:3000/ una vez levantado backend y frontend

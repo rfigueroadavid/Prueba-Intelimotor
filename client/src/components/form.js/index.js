@@ -28,7 +28,7 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            precio: null,
+            precio: "",
             descripcion: "",
             publishing: "sin-publicar",
         }
@@ -73,7 +73,7 @@ class Form extends React.Component {
                             onClick={() => {
                                 this.props.publicarAnuncio({precio:this.state.precio, descripcion: this.state.descripcion});
                             }}
-                            disabled={ this.state.precio!==null && this.state.descripcion!=='' ? false : true }
+                            disabled={ this.state.precio!==0 && this.state.descripcion!=='' ? false : true }
                         >
                             Publicar tu auto
       </Button>
